@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Convite - 8 anos Movimento Jovem</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#040617;
+      --accent:#6ee7ff;
+      --muted:#c8d6e5;
+      --card: rgba(255,255,255,0.04);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;font-family:'Montserrat',sans-serif;background:var(--bg);color:#fff;overflow-x:hidden}
+
+    .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px}
+    .invite{width:100%;max-width:1100px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:18px;overflow:hidden;box-shadow:0 10px 40px rgba(4,6,23,0.6);position:relative}
+
+    #starfield{position:absolute;inset:0;z-index:0}
+
+    .hero{position:relative;z-index:2;padding:44px 48px;display:grid;grid-template-columns:1fr 420px;gap:24px;align-items:center}
+    .title{font-size:72px;line-height:0.9;font-weight:800;color:var(--accent);text-shadow:0 6px 24px rgba(50,140,200,0.12)}
+    .subtitle{margin-top:8px;font-size:16px;color:var(--muted);letter-spacing:2px}
+
+    .speaker{margin-top:22px;display:flex;align-items:center;gap:16px}
+    .speaker img{width:92px;height:92px;border-radius:12px;object-fit:cover;border:3px solid rgba(255,255,255,0.06)}
+    .speaker .meta{font-size:14px}
+
+    .info{margin-top:26px;background:var(--card);padding:18px;border-radius:12px;display:flex;flex-direction:column;gap:8px}
+    .info .row{display:flex;justify-content:space-between;align-items:center}
+    .info .big{font-size:20px;font-weight:700}
+    .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+
+    .btn{
+      background:linear-gradient(90deg,var(--accent),#5ab6ff);
+      border:none;padding:12px 18px;border-radius:10px;
+      font-weight:700;cursor:pointer;
+      transition:all .3s ease;box-shadow:0 6px 18px rgba(40,140,200,0.12)
+    }
+    .btn:hover{transform:translateY(-3px);opacity:0.95}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.08)}
+
+    .right-panel{padding:28px;border-left:1px solid rgba(255,255,255,0.02)}
+    .countdown{font-size:36px;font-weight:800;text-align:center}
+    .countdown small{display:block;font-size:12px;color:var(--muted);font-weight:600;margin-top:6px}
+
+    .map{height:220px;border-radius:12px;overflow:hidden;margin-top:16px;border:1px solid rgba(255,255,255,0.03)}
+
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;
+      background:linear-gradient(180deg, rgba(2,6,12,0.7), rgba(2,6,12,0.85));z-index:9999}
+    .modal .box{width:360px;background:#061022;padding:20px;border-radius:12px;
+      border:1px solid rgba(255,255,255,0.04)}
+    .field{display:flex;flex-direction:column;margin-bottom:12px}
+    .field label{font-size:12px;color:var(--muted);margin-bottom:6px}
+    .field input,.field select{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);
+      background:transparent;color:#fff}
+
+    .footer{padding:18px 28px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+      display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+
+    @media(max-width:880px){
+      .hero{grid-template-columns:1fr}
+      .right-panel{border-left:none;border-top:1px solid rgba(255,255,255,0.02);padding-top:18px}
+      .title{font-size:44px;text-align:center}
+      .subtitle{text-align:center}
+      .speaker{justify-content:center}
+      .info{align-items:center;text-align:center}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="invite" role="region" aria-label="Convite Movimento Jovem">
+
+      <canvas id="starfield"></canvas>
+
+      <div class="hero">
+        <div class="left">
+          <div class="title">GABRIELA BARONE</div>
+          <div class="subtitle">Vamos juntos comemorar os 8 anos do MJ — Quinta | 20h00</div>
+
+          <div class="speaker">
+            <img src="conec.jpg" alt="Gabriela Barone">
+            <div class="meta">
+              <div style="font-weight:700">Gabriela Barone</div>
+              <div style="font-size:13px;color:var(--muted)">Convidada especial</div>
+            </div>
+          </div>
+
+          <div class="info">
+            <div class="row"><div class="big">QUINTA | 20h00</div><div style="font-size:13px;color:var(--muted)">Avenida C, 212 — Setor Água Branca</div></div>
+            <div style="font-size:13px;color:var(--muted)">
+              <p>📖 <strong>Tema: Jo 15, 12-17</strong><br><br>
+              💡 Jesus nos chama à vivência do amor verdadeiro, doando-se pelos outros como Ele fez.  
+              Ele nos eleva de servos a amigos, revelando os desígnios do Pai.  
+              Neste dia celebramos o aniversário do grupo, que reflete 8 anos de amor fraterno e do cumprimento das promessas de Deus —  
+              frutos da busca pela amizade com Cristo através da evangelização e da vida em comunidade.</p>
+            </div>
+
+            <div class="cta">
+              <button class="btn" id="rsvpBtn">Confirmar Presença</button>
+              <button class="btn secondary" id="shareWhatsapp">Compartilhar</button>
+              <button class="btn secondary" id="playMusic">▶ Música</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="right-panel">
+          <div class="countdown" id="countdown">00d 00h 00m 00s <small>até o evento</small></div>
+
+          <div class="map">
+            <iframe title="mapa" src="https://maps.google.com/maps?q=Avenida%20C%2C%20212%20Setor%20%C3%81gua%20Branca&t=&z=13&ie=UTF8&iwloc=&output=embed" style="width:100%;height:100%;border:0"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="credits">Movimento Jovem • 8 anos — Comunidade Nsa. Senhora Aparecida</div>
+        <div class="share">
+          <button class="btn" id="openWhats">Enviar WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="box" role="dialog" aria-modal="true" aria-label="Confirmar presença">
+      <h3 style="margin:0 0 8px 0">Confirmar Presença</h3>
+      <p style="margin:0 0 12px 0;color:var(--muted);font-size:13px">Deixe seu nome e se virá acompanhado.</p>
+      <div class="field"><label>Nome</label><input id="name" placeholder="Seu nome"></div>
+      <div class="field"><label>Qtd. de pessoas</label>
+        <select id="people"><option value="1">Só eu</option><option value="2">+1 acompanhante</option><option value="3">+2 ou mais</option></select>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
+        <button class="btn secondary" id="closeModal">Cancelar</button>
+        <button class="btn" id="sendRsvp">Enviar</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="bgMusic" loop src="Desperta - O Cordeiro_ o Leão e o Trono Parte 1 _ Colo de Deus (Clipe Oficial)(MP3_160K).mp3"></audio>
+
+  <script>
+    // ---------- Starfield ----------
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    function resizeCanvas(){canvas.width=innerWidth;canvas.height=innerHeight;}
+    window.addEventListener('resize',resizeCanvas);resizeCanvas();
+    let stars=[];
+    function initStars(){
+      const count=Math.round((canvas.width*canvas.height)/7000);
+      stars=Array.from({length:count},()=>({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        z:Math.random()*1.2,
+        r:Math.random()*1.6+0.2,
+        alpha:Math.random()*0.9
+      }));
+    }
+    function drawStars(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(const s of stars){
+        ctx.globalAlpha=s.alpha;
+        ctx.fillStyle='white';
+        ctx.beginPath();
+        ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+        ctx.fill();
+      }
+      requestAnimationFrame(drawStars);
+    }
+    function moveStars(){
+      for(const s of stars){
+        s.x+=s.z*0.2;
+        if(s.x>canvas.width) s.x=-5;
+      }
+    }
+    initStars();drawStars();setInterval(moveStars,50);
+
+    // ---------- Countdown ----------
+    const countdownEl=document.getElementById('countdown');
+    const now=new Date();
+    const target=new Date();
+    const targetWeekday=4;
+    const daysToAdd=(targetWeekday-now.getDay()+7)%7||7;
+    target.setDate(now.getDate()+daysToAdd);
+    target.setHours(20,0,0,0);
+    function updateCountdown(){
+      const diff=target-new Date();
+      if(diff<=0){countdownEl.innerHTML='Começou!<small>vá para o local</small>';return}
+      const d=Math.floor(diff/86400000),
+            h=Math.floor((diff%86400000)/3600000),
+            m=Math.floor((diff%3600000)/60000),
+            s=Math.floor((diff%60000)/1000);
+      countdownEl.innerHTML=`${String(d).padStart(2,'0')}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s <small>até o evento</small>`;
+    }
+    setInterval(updateCountdown,1000);updateCountdown();
+
+    // ---------- Modal ----------
+    const modal=document.getElementById('modal');
+    document.getElementById('rsvpBtn').onclick=()=>modal.style.display='flex';
+    document.getElementById('closeModal').onclick=()=>modal.style.display='none';
+    document.getElementById('sendRsvp').onclick=()=>{
+      const name=document.getElementById('name').value.trim();
+      const people=document.getElementById('people').value;
+      if(!name){alert('Por favor, insira seu nome.');return;}
+      const list=JSON.parse(localStorage.getItem('rsvp_mj')||'[]');
+      list.push({name,people,time:new Date().toISOString()});
+      localStorage.setItem('rsvp_mj',JSON.stringify(list));
+      alert('Presença confirmada — obrigado!');
+      modal.style.display='none';
+    };
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')modal.style.display='none';});
+
+    // ---------- WhatsApp ----------
+    function whatsappMessage(){
+      const text=encodeURIComponent('Vou confirmar presença no evento: 8 anos do Movimento Jovem — Quinta 20h00. Mais infos: ');
+      return `https://api.whatsapp.com/send?text=${text}${encodeURIComponent(location.href)}`;
+    }
+    document.getElementById('shareWhatsapp').onclick=()=>window.open(whatsappMessage(),'_blank');
+    document.getElementById('openWhats').onclick=()=>window.open(whatsappMessage(),'_blank');
+
+    // ---------- Música ----------
+    const audio=document.getElementById('bgMusic');
+    const musicBtn=document.getElementById('playMusic');
+    musicBtn.onclick=()=>{
+      if(!audio.src){alert('Nenhuma música definida.');return;}
+      if(audio.paused){audio.play();musicBtn.textContent='⏸ Música';}
+      else{audio.pause();musicBtn.textContent='▶ Música';}
+    };
+  </script>
+</body>
+</html>

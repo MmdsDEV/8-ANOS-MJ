@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Convite - 8 Anos Movimento Jovem</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#040617;
+      --accent:#6ee7ff;
+      --muted:#c8d6e5;
+      --card:rgba(255,255,255,0.05);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Montserrat',sans-serif;
+      background:var(--bg);
+      color:#fff;
+      overflow-x:hidden;
+    }
+    .wrap{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+    .invite{
+      width:100%;
+      max-width:900px;
+      background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));
+      border-radius:18px;
+      box-shadow:0 10px 40px rgba(0,0,0,0.5);
+      position:relative;
+      overflow:hidden;
+      z-index:1;
+    }
+    #starfield{
+      position:absolute;
+      inset:0;
+      z-index:0;
+    }
+    .content{
+      position:relative;
+      z-index:2;
+      padding:48px;
+      text-align:center;
+    }
+    h1{
+      font-size:52px;
+      color:var(--accent);
+      font-weight:800;
+      margin-bottom:8px;
+    }
+    h2{
+      font-size:18px;
+      color:var(--muted);
+      margin-bottom:24px;
+      letter-spacing:1px;
+    }
+    p{
+      line-height:1.6;
+      color:var(--muted);
+      max-width:700px;
+      margin:0 auto 28px;
+      font-size:15px;
+    }
+    .info{
+      background:var(--card);
+      border-radius:12px;
+      padding:16px;
+      margin:24px auto;
+      width:fit-content;
+      font-weight:600;
+    }
+    .btns{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      background:linear-gradient(90deg,var(--accent),#4eaaff);
+      border:none;
+      color:#000;
+      font-weight:700;
+      padding:12px 18px;
+      border-radius:10px;
+      cursor:pointer;
+      transition:0.2s;
+    }
+    .btn.secondary{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.1);
+      color:#fff;
+    }
+    .btn:hover{transform:translateY(-3px)}
+    .footer{
+      text-align:center;
+      font-size:13px;
+      color:var(--muted);
+      padding:20px;
+      background:rgba(255,255,255,0.02);
+    }
+    @media(max-width:600px){
+      h1{font-size:36px}
+      .content{padding:32px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="invite">
+      <canvas id="starfield"></canvas>
+      <div class="content">
+        <h1>8 Anos Movimento Jovem</h1>
+        <h2>📅 Quinta-feira • 20h00 — Comunidade Nsa. Senhora Aparecida</h2>
+
+        <p>📖 <strong>Tema: Jo 15, 12-17</strong><br><br>
+        💡 Jesus nos chama à vivência do amor verdadeiro, doando-se pelos outros como Ele fez.  
+        Ele nos eleva de servos a amigos, revelando os desígnios do Pai.  
+        Neste dia celebramos o aniversário do grupo, que reflete 8 anos de amor fraterno e do cumprimento das promessas de Deus —  
+        frutos da busca pela amizade com Cristo através da evangelização e da vida em comunidade.</p>
+
+        <div class="info">📍 Avenida C, 212 — Setor Água Branca</div>
+
+        <div class="btns">
+          <button class="btn" id="confirmar">Confirmar Presença</button>
+          <button class="btn secondary" id="compartilhar">Compartilhar</button>
+          <button class="btn secondary" id="playMusic">▶ Música</button>
+        </div>
+      </div>
+      <div class="footer">
+        Movimento Jovem • 8 anos — Comunidade Nsa. Senhora Aparecida
+      </div>
+    </div>
+  </div>
+
+  <audio id="bgMusic" loop src="Desperta - O Cordeiro_ o Leão e o Trono Parte 1 _ Colo de Deus (Clipe Oficial)(MP3_160K).mp3"></audio>
+
+  <script>
+    // ----- Starfield Animation -----
+    const canvas=document.getElementById('starfield');
+    const ctx=canvas.getContext('2d');
+    function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
+    window.addEventListener('resize',resize);resize();
+    const stars=Array.from({length:150},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,z:Math.random()}));
+    function drawStars(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(const s of stars){
+        ctx.beginPath();
+        ctx.arc(s.x,s.y,1.2,0,Math.PI*2);
+        ctx.fillStyle='rgba(255,255,255,'+(0.5+Math.random()*0.5)+')';
+        ctx.fill();
+      }
+      requestAnimationFrame(drawStars);
+    }
+    drawStars();
+
+    // ----- WhatsApp Share / Confirm -----
+    const numero='5562996966304';
+    function linkWhats(msg){
+      return `https://wa.me/${numero}?text=${encodeURIComponent(msg)}`;
+    }
+    document.getElementById('confirmar').addEventListener('click',()=>{
+      const msg="Olá! Quero confirmar presença no evento de 8 anos do Movimento Jovem 🙌";
+      window.open(linkWhats(msg),'_blank');
+    });
+    document.getElementById('compartilhar').addEventListener('click',()=>{
+      const msg="Venha comigo celebrar os 8 anos do Movimento Jovem! 🎉 Quinta às 20h — Comunidade Nsa. Senhora Aparecida 💙";
+      window.open(linkWhats(msg),'_blank');
+    });
+
+    // ----- Music Toggle -----
+    const audio=document.getElementById('bgMusic');
+    const btnMusic=document.getElementById('playMusic');
+    btnMusic.addEventListener('click',()=>{
+      if(audio.paused){audio.play();btnMusic.textContent='⏸ Música';}
+      else{audio.pause();btnMusic.textContent='▶ Música';}
+    });
+  </script>
+</body>
+</html>
