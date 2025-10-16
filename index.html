@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Convite - 8 anos Movimento Jovem</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&display=swap" rel="stylesheet">
-      <link rel="icon" href="https://github.com/MmdsDEV/convite2/blob/main/mj.png?raw=true" type="image/png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="preload" href="https://github.com/MmdsDEV/convite2/blob/main/mj.png?raw=true" as="image">
+  <link rel="icon" href="https://github.com/MmdsDEV/convite2/blob/main/mj.png?raw=true" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://github.com/MmdsDEV/convite2/blob/main/mj.png?raw=true" as="image">
   <style>
     :root{
       --bg:#040617;
@@ -72,6 +72,11 @@
       .subtitle{text-align:center}
       .speaker{justify-content:center}
       .info{align-items:center;text-align:center}
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
     }
   </style>
 </head>
@@ -185,23 +190,40 @@
     initStars();drawStars();setInterval(moveStars,50);
 
     // ---------- Countdown ----------
-    const countdownEl=document.getElementById('countdown');
-    const now=new Date();
-    const target=new Date();
-    const targetWeekday=4;
-    const daysToAdd=(targetWeekday-now.getDay()+7)%7||7;
-    target.setDate(now.getDate()+daysToAdd);
-    target.setHours(20,0,0,0);
-    function updateCountdown(){
-      const diff=target-new Date();
-      if(diff<=0){countdownEl.innerHTML='Começou!<small>vá para o local</small>';return}
-      const d=Math.floor(diff/86400000),
-            h=Math.floor((diff%86400000)/3600000),
-            m=Math.floor((diff%3600000)/60000),
-            s=Math.floor((diff%60000)/1000);
-      countdownEl.innerHTML=`${String(d).padStart(2,'0')}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s <small>até o evento</small>`;
+    const countdownEl = document.getElementById('countdown');
+
+    const target = new Date();
+    target.setHours(20, 0, 0, 0);
+
+    const now = new Date();
+    if (now > target) target.setDate(target.getDate() + 1);
+
+    function updateCountdown() {
+      const diff = target - new Date();
+      if (diff <= 0) {
+        countdownEl.innerHTML = `
+          <span style="font-size:42px;font-weight:900;color:#6ee7ff;animation:blink 1s infinite">
+            🎉 Começou! Uhulll 🎶
+          </span>
+          <small style="display:block;color:#c8d6e5;font-weight:600;margin-top:8px">
+            O evento já está acontecendo!
+          </small>
+        `;
+        clearInterval(timer);
+        return;
+      }
+
+      const d = Math.floor(diff / 86400000),
+            h = Math.floor((diff % 86400000) / 3600000),
+            m = Math.floor((diff % 3600000) / 60000),
+            s = Math.floor((diff % 60000) / 1000);
+
+      countdownEl.innerHTML =
+        `${String(d).padStart(2,'0')}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s <small>até o evento</small>`;
     }
-    setInterval(updateCountdown,1000);updateCountdown();
+
+    const timer = setInterval(updateCountdown, 1000);
+    updateCountdown();
 
     // ---------- Modal ----------
     const modal=document.getElementById('modal');
@@ -238,5 +260,3 @@
   </script>
 </body>
 </html>
-
-
